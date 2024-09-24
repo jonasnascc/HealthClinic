@@ -6,9 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Set;
 
 @Table
@@ -25,14 +23,13 @@ public class Appointment {
     private LocalDateTime scheduledDate;
 
     @ManyToOne
-    @JsonIgnore
     private Patient patient;
 
     @ManyToOne
-    @JsonIgnore
     private Doctor doctor;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "appointment")
+    @JsonIgnore
     private Set<Exam> exams;
 
     public Appointment(LocalDateTime scheduledDate, Patient patient, Doctor doctor, Set<Exam> exams) {

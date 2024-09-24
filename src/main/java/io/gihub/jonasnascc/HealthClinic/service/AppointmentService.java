@@ -3,7 +3,6 @@ package io.gihub.jonasnascc.HealthClinic.service;
 import io.gihub.jonasnascc.HealthClinic.dto.AppointmentDto;
 import io.gihub.jonasnascc.HealthClinic.entity.Appointment;
 import io.gihub.jonasnascc.HealthClinic.entity.Doctor;
-import io.gihub.jonasnascc.HealthClinic.entity.Exam;
 import io.gihub.jonasnascc.HealthClinic.entity.Patient;
 import io.gihub.jonasnascc.HealthClinic.repository.AppointmentRepository;
 import jakarta.transaction.Transactional;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

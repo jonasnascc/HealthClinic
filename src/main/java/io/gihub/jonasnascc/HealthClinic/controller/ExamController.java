@@ -1,25 +1,48 @@
 package io.gihub.jonasnascc.HealthClinic.controller;
 
+import io.gihub.jonasnascc.HealthClinic.dto.ExamDto;
+import io.gihub.jonasnascc.HealthClinic.service.ExamService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/exams")
+@RequiredArgsConstructor
 public class ExamController {
-    public ResponseEntity<?> create () {
-        return null;
+    private final ExamService service;
+
+    @PostMapping
+    public ResponseEntity<?> create (
+            @RequestBody ExamDto dto
+    ) {
+        return ResponseEntity.ok(service.create(dto));
     }
-    public ResponseEntity<?> find () {
-        return null;
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> find (
+            @PathVariable Long id
+    ) {
+        return ResponseEntity.ok(service.find(id));
     }
+
+    @GetMapping
     public ResponseEntity<?> list () {
-        return null;
+        return ResponseEntity.ok(service.list());
     }
-    public ResponseEntity<?> update () {
-        return null;
+
+    @PutMapping("{id}")
+    public ResponseEntity<?> update (
+            @PathVariable Long id,
+            @RequestBody ExamDto dto
+    ) {
+        return ResponseEntity.ok(service.update(id, dto));
     }
-    public ResponseEntity<?> delete () {
-        return null;
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> delete (
+            @PathVariable Long id
+    ) {
+        return ResponseEntity.ok(service.delete(id));
     }
 }
