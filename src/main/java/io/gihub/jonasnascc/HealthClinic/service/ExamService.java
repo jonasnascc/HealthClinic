@@ -1,6 +1,7 @@
 package io.gihub.jonasnascc.HealthClinic.service;
 
 import io.gihub.jonasnascc.HealthClinic.dto.ExamDto;
+import io.gihub.jonasnascc.HealthClinic.dto.ExamStatusDto;
 import io.gihub.jonasnascc.HealthClinic.entity.Appointment;
 import io.gihub.jonasnascc.HealthClinic.entity.EnumTypes.ExamStatus;
 import io.gihub.jonasnascc.HealthClinic.entity.Exam;
@@ -38,6 +39,13 @@ public class ExamService {
 
         return examRepository.save(exam).getId();
     }
+
+    public void changeStatus(Long id, ExamStatusDto dto) {
+        Exam exam = findExam(id);
+        exam.setStatus(dto.status());
+        examRepository.save(exam);
+    }
+
     public Exam delete(Long id){
         Exam exam = findExam(id);
         examRepository.delete(exam);
@@ -64,4 +72,5 @@ public class ExamService {
                 appointment
         );
     }
+
 }

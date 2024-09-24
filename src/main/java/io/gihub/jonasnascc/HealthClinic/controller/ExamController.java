@@ -1,6 +1,7 @@
 package io.gihub.jonasnascc.HealthClinic.controller;
 
 import io.gihub.jonasnascc.HealthClinic.dto.ExamDto;
+import io.gihub.jonasnascc.HealthClinic.dto.ExamStatusDto;
 import io.gihub.jonasnascc.HealthClinic.service.ExamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ public class ExamController {
     ) {
         return ResponseEntity.ok(service.create(dto));
     }
+
 
     @GetMapping("{id}")
     public ResponseEntity<?> find (
@@ -37,6 +39,15 @@ public class ExamController {
             @RequestBody ExamDto dto
     ) {
         return ResponseEntity.ok(service.update(id, dto));
+    }
+
+    @PatchMapping("{id}")
+    public ResponseEntity<?> changeStatus (
+            @PathVariable Long id,
+            @RequestBody ExamStatusDto dto
+    ) {
+        service.changeStatus(id, dto);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("{id}")
