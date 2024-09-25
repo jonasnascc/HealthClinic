@@ -1,6 +1,6 @@
 package io.gihub.jonasnascc.HealthClinic.service;
 
-import io.gihub.jonasnascc.HealthClinic.dto.PatientDto;
+import io.gihub.jonasnascc.HealthClinic.dto.PatientDTO;
 import io.gihub.jonasnascc.HealthClinic.entity.Patient;
 import io.gihub.jonasnascc.HealthClinic.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class PatientService {
     private final PatientRepository patientRepository;
 
-    public String create(PatientDto dto){
+    public String create(PatientDTO dto){
         Optional<Patient> optPatient = patientRepository
                 .findByCpf(dto.cpf());
         if(optPatient.isPresent()) throw new RuntimeException("Patient already exists in database.");
@@ -30,7 +30,7 @@ public class PatientService {
     public List<Patient> list(){
         return patientRepository.findAll();
     }
-    public Patient update(String cpf, PatientDto dto){
+    public Patient update(String cpf, PatientDTO dto){
         Patient savedPatient = findPatient(cpf);
 
         Patient patient = convertPatientDto(dto);
@@ -45,7 +45,7 @@ public class PatientService {
         return patient;
     }
 
-    public static Patient convertPatientDto(PatientDto dto) {
+    public static Patient convertPatientDto(PatientDTO dto) {
         return new Patient(
                 dto.cpf(),
                 dto.firstName(),

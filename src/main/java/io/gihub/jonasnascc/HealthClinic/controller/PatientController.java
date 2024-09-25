@@ -1,9 +1,11 @@
 package io.gihub.jonasnascc.HealthClinic.controller;
 
-import io.gihub.jonasnascc.HealthClinic.dto.PatientDto;
+import io.gihub.jonasnascc.HealthClinic.dto.PatientDTO;
 import io.gihub.jonasnascc.HealthClinic.service.PatientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -12,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class PatientController {
     private final PatientService service;
 
-    @PostMapping
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> create (
-            @RequestBody PatientDto dto
+            @RequestBody @Validated PatientDTO dto
     ) {
         return ResponseEntity.ok(service.create(dto));
     }
@@ -34,7 +36,7 @@ public class PatientController {
     @PutMapping("{cpf}")
     public ResponseEntity<?> update (
             @PathVariable String cpf,
-            @RequestBody PatientDto dto
+            @RequestBody PatientDTO dto
     ) {
         return ResponseEntity.ok(service.update(cpf, dto));
     }
