@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -17,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(PatientController.class)
+@ActiveProfiles("test")
 public class PatientTests {
     private static final String END_POINT_PATH = "/api/patients";
 
@@ -25,14 +27,14 @@ public class PatientTests {
     @MockBean private PatientService patientService;
 
     @Test
-    public void testCreateShouldReturn2xxSuccessfull() throws Exception {
+    public void createPatient_shouldReturn2xxSuccessfull() throws Exception {
         PatientDTO dto = new PatientDTO(
                 "716.286.210-10",
                 "Jonas",
                 "Nascimento",
                 "jonasnascimento@mail.com",
                 "83999092388",
-                "Callifornia Hawai, 210 st"
+                "California Hawaii, 210 st"
         );
 
         String requestBody = objectMapper.writeValueAsString(dto);
@@ -43,7 +45,7 @@ public class PatientTests {
     }
 
     @Test
-    public void testCreateShouldReturn400BadRequest() throws Exception {
+    public void createPatient_shouldReturn400BadRequest() throws Exception {
         PatientDTO dto = new PatientDTO(
                 "122.454.333-00",
                 "Jonas",
